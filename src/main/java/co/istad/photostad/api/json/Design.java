@@ -1,14 +1,15 @@
-package co.istad.photostad.api.watermark.json;
+package co.istad.photostad.api.json;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Design {
+public class Design implements Serializable {
     private String id;
     private String type;
     private String name;

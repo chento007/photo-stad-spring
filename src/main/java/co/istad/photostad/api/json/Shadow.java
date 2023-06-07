@@ -1,4 +1,4 @@
-package co.istad.photostad.api.watermark.json;
+package co.istad.photostad.api.json;
 
 import lombok.*;
 

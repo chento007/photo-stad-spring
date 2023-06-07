@@ -1,6 +1,4 @@
-package co.istad.photostad.api.watermark.json;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package co.istad.photostad.api.json;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
@@ -16,15 +14,15 @@ public class Layer {
     private double angle;
     private String stroke; // color border
     private int strokeWidth;
-    private int left;
-    private int top;
-    private int width;
-    private int height;
-    private float opacity;
-    private String originX;
-    private String originY;
-    private double scaleX;
-    private double scaleY;
+    private int left; // coordinate x
+    private int top; // coordinate y
+    private int width; // thumbnailator
+    private int height; // thumbnailator
+    private float opacity; // thumbnailator
+    private String originX; //thumbnailator
+    private String originY; //thumbnailator
+    private double scaleX; // use to calculate width
+    private double scaleY; // use to calculate height
     private String type;
     private boolean flipX;
     private boolean flipY;

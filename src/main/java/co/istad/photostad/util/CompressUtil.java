@@ -1,7 +1,7 @@
 package co.istad.photostad.util;
 
-import co.istad.photostad.api.watermark.json.Design;
-import co.istad.photostad.api.watermark.json.Layer;
+import co.istad.photostad.api.json.Design;
+import co.istad.photostad.api.json.Layer;
 import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Coordinate;
@@ -16,7 +16,6 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
 

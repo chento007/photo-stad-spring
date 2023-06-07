@@ -1,21 +1,16 @@
 package co.istad.photostad.api.watermark;
 
-import co.istad.photostad.api.watermark.json.Design;
-import co.istad.photostad.api.watermark.json.Layer;
-import co.istad.photostad.api.watermark.json.Scene;
+import co.istad.photostad.api.json.Design;
+import co.istad.photostad.api.json.Layer;
+import co.istad.photostad.api.json.Scene;
 import co.istad.photostad.file.web.FileBase64Dto;
 import co.istad.photostad.util.CompressUtil;
 import co.istad.photostad.util.FileUtil;
 import lombok.AllArgsConstructor;
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.filters.Caption;
-import net.coobird.thumbnailator.geometry.Coordinate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,16 +49,6 @@ public class WatermarkServiceImp implements WatermarkService {
                     System.out.println("fontSize: " + layer.getFontSize());
                     System.out.println("textAlign: " + layer.getTextAlign());
                     System.out.println("fontURL: " + layer.getFontURL());
-//                    try {
-//                        watermark = Thumbnails.of(watermark)
-//                                .size(watermark.getWidth(), watermark.getHeight())
-//                                .watermark(
-//                                       null
-//                                )
-//                                .asBufferedImage();
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//                    }
                 } else if (layer.getSrc() != null) {
                     watermark = compressUtil.compressWatermark(watermark, layer);
                 }

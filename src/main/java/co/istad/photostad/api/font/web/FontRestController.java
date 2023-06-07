@@ -14,10 +14,9 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/fonts")
-@CrossOrigin(origins = " http://localhost:5173/")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class FontRestController {
     private final FontService fontService;
-
     @PostMapping
     BaseRest<?> saveMultiple(@RequestBody List<Font> fonts) {
         List<Font> result = fontService.saveMultiple(fonts);

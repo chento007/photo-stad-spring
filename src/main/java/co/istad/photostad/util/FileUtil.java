@@ -1,17 +1,14 @@
 package co.istad.photostad.util;
 
 
-import co.istad.photostad.api.watermark.json.Layer;
+import co.istad.photostad.api.json.Layer;
 import co.istad.photostad.file.web.FileBase64Dto;
 import co.istad.photostad.file.web.FileDto;
-import co.istad.photostad.file.web.SearchFileDto;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.xml.bind.DatatypeConverter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.geometry.Coordinate;
-import net.coobird.thumbnailator.geometry.Positions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -30,8 +27,6 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
