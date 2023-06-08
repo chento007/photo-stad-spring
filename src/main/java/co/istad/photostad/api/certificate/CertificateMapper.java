@@ -17,7 +17,7 @@ public interface CertificateMapper {
             value = {
                     @Result(property = "editorJson", column = "editor_json", typeHandler = co.istad.photostad.config.DesignJsonTypeHandler.class),
                     @Result(property = "createdBy", column = "created_by"),
-                    @Result(property = "createdDate", column = "created_date")
+                    @Result(property = "createdAt", column = "created_at")
             }
     )
     @SelectProvider(type = CertificateProvider.class, method = "buildSelectCertificateByIdSql")

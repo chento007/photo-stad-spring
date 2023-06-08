@@ -16,6 +16,6 @@ public class Certificate {
     private String uuid;
     private Design editorJson;
     private Integer createdBy;
-    private Timestamp createdDate;
+    private Timestamp createdAt;
     private Boolean isDeleted;
 }

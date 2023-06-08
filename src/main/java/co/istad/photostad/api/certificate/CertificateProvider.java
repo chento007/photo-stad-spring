@@ -11,7 +11,7 @@ public class CertificateProvider {
             VALUES("uuid", "#{p.uuid}");
             VALUES("editor_json", "#{p.editorJson,typeHandler =co.istad.photostad.config.DesignJsonTypeHandler}::json");
             VALUES("created_by", "#{p.createdBy}");
-            VALUES("create_date","#{p.createdDate}");
+            VALUES("created_at","#{p.createdAt}");
             VALUES("is_deleted", "#{p.isDeleted}");
         }}.toString();
     }
