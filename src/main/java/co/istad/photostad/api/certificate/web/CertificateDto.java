@@ -10,6 +10,6 @@ public record CertificateDto(
          String uuid,
          Design editorJson,
          Integer createdBy,
-         Timestamp createdDate
+         Timestamp createdAt
 ) {
 }

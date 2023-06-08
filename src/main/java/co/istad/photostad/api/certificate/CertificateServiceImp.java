@@ -19,8 +19,10 @@ public class CertificateServiceImp implements CertificateService{
     private final CertificateMapStruct certificateMapStrut;
     @Override
     public CertificateDto insertCertificate(CreateCertificateDto createCertificateDto) {
+        System.out.println("user id : "+createCertificateDto.createdBy());
         Certificate certificate=certificateMapStrut.createCertificateDtoToCertificate(createCertificateDto);
         certificate.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        System.out.println(certificate.getCreatedAt());
         certificate.setUuid(UUID.randomUUID().toString());
         certificate.setIsDeleted(false);
         if(certificateMapper.insert(certificate)){
