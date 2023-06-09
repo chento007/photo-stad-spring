@@ -54,7 +54,7 @@ public class CertificateServiceImp implements CertificateService{
         }
         throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND,
-                String.format("certificate with %d hasn't found",id)
+                String.format("certificate with %d hasn't  found",id)
         );
     }
 }

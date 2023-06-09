@@ -58,7 +58,7 @@ public class ApiException {
         return BaseError.builder()
                 .status(false)
                 .code(HttpStatus.PAYLOAD_TOO_LARGE.value())
-                .message("something when wrong ... please check")
+                .message("something when wrong  ... please check")
                 .timestamp(LocalDateTime.now())
                 .errors("Maximum upload size exceeded: 1000KB")
                 .build();
