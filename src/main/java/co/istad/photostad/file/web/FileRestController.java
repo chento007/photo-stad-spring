@@ -5,19 +5,24 @@ import co.istad.photostad.base.BaseRest;
 import co.istad.photostad.file.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import java.io.IOException;
 import java.time.LocalDateTime;
-
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/v1/files")
 @Slf4j
 @RequiredArgsConstructor
 public class FileRestController {
+    @Value("${file.server-path}")
+    private String fileServerPath;
     private final FileService fileService;
 
     @PostMapping("/upload-file-base64")
@@ -104,5 +109,16 @@ public class FileRestController {
                 .data(resultFiles)
                 .build();
     }
+
+    @GetMapping("/download/{fileName}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) throws IOException {
+        return fileService.downloadFile(fileName);
+    }
+
+    @GetMapping("/downloadFilesZip")
+    public ResponseEntity<Resource> compressImages() throws IOException {
+        return fileService.compressImages();
+    }
+
 
 }

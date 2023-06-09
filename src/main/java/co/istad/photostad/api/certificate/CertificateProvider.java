@@ -25,8 +25,22 @@ public class CertificateProvider {
     public String buildUpdateStatusCertificateByIdSql(){
         return new SQL(){{
             UPDATE(tblName);
-            SET("is_deleted=TRUE");
-            WHERE("id=#{id}","");
+            SET("is_deleted=#{status}");
+            WHERE("id=#{id}");
+        }}.toString();
+    }
+
+    public String BuildDeleteByIdSql(){
+        return new SQL(){{
+            DELETE_FROM(tblName);
+            WHERE("id=#{id}");
+        }}.toString();
+    }
+
+    public String BuildSelectAllSql(){
+        return new SQL(){{
+            SELECT("*");
+            FROM(tblName);
         }}.toString();
     }
 }

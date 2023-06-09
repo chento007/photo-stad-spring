@@ -3,6 +3,7 @@ package co.istad.photostad.api.certificate;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -25,5 +26,12 @@ public interface CertificateMapper {
     @Select("SELECT EXISTS (SELECT *FROM certificates where id=#{id})")
     boolean isIdExist(@Param("id") Integer id);
     @UpdateProvider(type = CertificateProvider.class,method = "buildUpdateStatusCertificateByIdSql")
+    void updateStatusById(@Param("id") Integer id,@Param("status")boolean status);
+
+    @DeleteProvider(type = CertificateProvider.class,method ="BuildDeleteByIdSql")
     void deleteById(Integer id);
+    @ResultMap("certificateResultMap")
+
+    @SelectProvider(type = CertificateProvider.class,method = "BuildSelectAllSql")
+    List<Certificate> selectAll();
 }

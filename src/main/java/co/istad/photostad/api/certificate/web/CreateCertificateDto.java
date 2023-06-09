@@ -7,6 +7,6 @@ public record CreateCertificateDto(
         @NotNull(message = "data edit is require !!")
         Design editorJson,
         @NotNull(message = "user ID id is require !!")
-        Integer createBy
+        Integer createdBy
 ) {
 }
