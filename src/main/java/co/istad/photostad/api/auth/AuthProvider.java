@@ -81,7 +81,7 @@ public class AuthProvider {
         return new SQL() {{
             SELECT("*");
             FROM(tblName);
-            WHERE("email=#{email}", "is_deleted=FALSE", "is_verified=TRUE");
+            WHERE("email=#{email}", "is_deleted=FALSE", "is_verified=FALSE");
         }}.toString();
     }
 

@@ -40,6 +40,7 @@ public class AuthServiceImp implements AuthService {
     private String appEmail;
     private final JwtEncoder jwtEncoder;
     private final FormatUtil formatUtil;
+
     @Transactional
     @Override
     public String register(RegisterDto registerDto) {
@@ -47,7 +48,7 @@ public class AuthServiceImp implements AuthService {
         user.setIsVerified(false);
         user.setPassword(encoder.encode(registerDto.password()));
         user.setUuid(UUID.randomUUID().toString());
-        user.setCreatedAt(formatUtil.timeStampToString( new Timestamp(System.currentTimeMillis())));
+        user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         if (authMapper.register(user)) {
             for (Integer role : registerDto.roleIds()) { // create user roles
                 if (authMapper.createUserRole(user.getId(), role)) {
@@ -129,10 +130,14 @@ public class AuthServiceImp implements AuthService {
                 .build();
         String accessToken = jwtEncoder.encode(JwtEncoderParameters.from(claimsSet)).getTokenValue();
         //update login in at
-        User user = authMapper.findEmail(loginDto.email()).orElseThrow();
-        user.setLoggedInAt(formatUtil.timeStampToString(new Timestamp(System.currentTimeMillis())));
+        User user = authMapper.selectUserByEmailToUpdateLoginAt(loginDto.email()).orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        String.format("User with email %s is not found", loginDto.email())
+                )
+        );
+        user.setLoggedInAt(new Timestamp(System.currentTimeMillis()));
         authMapper.updateLoginAt(user);
         return new AuthDto(accessToken);
-        //TODO update login
     }
 }

@@ -23,7 +23,7 @@ public interface AuthMapper {
     @Results(
             id = "authResultMap",
             value = {
-                    @Result(column = "id",property = "id"),
+                    @Result(column = "id", property = "id"),
                     @Result(column = "is_verified", property = "isVerified"),
                     @Result(column = "verified_code", property = "verifiedCode"),
                     @Result(column = "family_name", property = "familyName"),
@@ -64,4 +64,6 @@ public interface AuthMapper {
     @UpdateProvider(type = AuthProvider.class, method = "buildUpdateLoginAtSql")
     void updateLoginAt(@Param("u") User user);
 
+    @Select("SELECT *FROM users WHERE email=#{email} AND is_deleted=FALSE")
+    Optional<User> selectUserByEmailToUpdateLoginAt(String email);
 }

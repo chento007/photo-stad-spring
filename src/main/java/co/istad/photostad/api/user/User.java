@@ -3,6 +3,7 @@ package co.istad.photostad.api.user;
 import co.istad.photostad.api.image.Image;
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 @ToString
@@ -25,8 +26,8 @@ public class User {
     private String phoneNumber;
     private String address;
     private String biography;
-    private String createdAt;
-    private String loggedInAt;
+    private Timestamp createdAt;
+    private Timestamp loggedInAt;
     private Boolean isVerified;
     private String verifiedCode;
     private Boolean isDeleted;

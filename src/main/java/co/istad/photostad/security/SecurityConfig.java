@@ -59,7 +59,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/api/v1/auth/**","/api/v1/users/**","/api/v1/images/**").permitAll();
+            auth.requestMatchers(
+                    "/api/v1/auth/**",
+                    "/api/v1/users/**",
+                    "/api/v1/images/**"
+            ).permitAll();
+            auth.anyRequest().authenticated();
         });
         // validate jwt before income
         http.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
