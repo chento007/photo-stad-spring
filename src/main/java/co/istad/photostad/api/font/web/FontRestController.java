@@ -4,6 +4,7 @@ import co.istad.photostad.api.font.Font;
 import co.istad.photostad.api.font.FontService;
 import co.istad.photostad.base.BaseRest;
 import co.istad.photostad.base.FontBaseRest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ import java.util.List;
 public class FontRestController {
     private final FontService fontService;
     @PostMapping
-    BaseRest<?> saveMultiple(@RequestBody List<Font> fonts) {
+    BaseRest<?> saveMultiple(@Valid @RequestBody List<Font> fonts) {
         List<Font> result = fontService.saveMultiple(fonts);
         return BaseRest.builder()
                 .status(true)

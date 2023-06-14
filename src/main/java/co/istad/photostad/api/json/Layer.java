@@ -32,7 +32,7 @@ public class Layer {
     private Shadow shadow;
     private Integer charSpacing;
     private String fontFamily;
-    private Float fontSize;
+    private Integer fontSize;
     private String text;
     private String textAlign;
     private String fontURL;

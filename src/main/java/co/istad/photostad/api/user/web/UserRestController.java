@@ -31,11 +31,9 @@ public class UserRestController {
     @GetMapping
     public BaseRest<?> selectAll(@RequestParam(required = false, name = "page", defaultValue = "1") int page,
                                  @RequestParam(required = false, name = "limit", defaultValue = "20") int limit,
-                                 @RequestParam(required = false, name = "name", defaultValue = "") String name,
-                                 @RequestParam(required = false, name = "isDeleted", defaultValue = "false") Boolean isDeleted,
-                                 @RequestParam(required = false, name = "isFetchAllStatus", defaultValue = "false") Boolean isFetchAllStatus
+                                 @RequestParam(required = false, name = "name", defaultValue = "") String name
     ) {
-        PageInfo<UserDto> userDtoPageInfo = userService.selectAll(page, limit, name, isDeleted, isFetchAllStatus);
+        PageInfo<UserDto> userDtoPageInfo = userService.selectAll(page, limit, name);
         return BaseRest.builder()
                 .status(true)
                 .code(HttpStatus.OK.value())

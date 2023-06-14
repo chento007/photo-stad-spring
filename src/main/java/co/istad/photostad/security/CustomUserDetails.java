@@ -1,7 +1,7 @@
 package co.istad.photostad.security;
 
 import co.istad.photostad.api.user.Authority;
-import co.istad.photostad.api.user.Role;
+import co.istad.photostad.api.role.Role;
 import co.istad.photostad.api.user.User;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

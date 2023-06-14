@@ -8,25 +8,44 @@ public class CertificateProvider {
     public String buildInsertCertificateSql() {
         return new SQL() {{
             INSERT_INTO(tblName);
-            VALUES("uuid", "#{p.uuid}");
-            VALUES("editor_json", "#{p.editorJson,typeHandler =co.istad.photostad.config.DesignJsonTypeHandler}::json");
-            VALUES("created_by", "#{p.createdBy}");
-            VALUES("created_at","#{p.createdAt}");
-            VALUES("is_deleted", "#{p.isDeleted}");
+            VALUES("uuid", "#{c.uuid}");
+            VALUES("editor_json", "#{c.editorJson,typeHandler =co.istad.photostad.config.DesignJsonTypeHandler}::json");
+            VALUES("created_by", "#{c.createdBy}");
+            VALUES("created_at", "#{c.createdAt}");
+            VALUES("is_deleted", "FALSE");
         }}.toString();
     }
-    public String buildSelectCertificateByIdSql(){
-        return new SQL(){{
+
+    public String buildSelectCertificateByIdSql() {
+        return new SQL() {{
             SELECT("*");
             FROM(tblName);
-            WHERE("id=#{id}");
+            WHERE("id=#{id}","is_deleted=false");
         }}.toString();
     }
-    public String buildUpdateStatusCertificateByIdSql(){
-        return new SQL(){{
+
+    public String buildUpdateStatusCertificateByIdSql() {
+        return new SQL() {{
             UPDATE(tblName);
             SET("is_deleted=TRUE");
-            WHERE("id=#{id}","");
+            WHERE("id=#{id}", "is_deleted=false");
+        }}.toString();
+    }
+
+    public String buildFindAllCertificateSql() {
+        return new SQL() {{
+            SELECT("*");
+            FROM(tblName);
+            WHERE("is_deleted=false");
+        }}.toString();
+    }
+
+    public String buildUpdateCertificateSql() {
+        return new SQL() {{
+            UPDATE(tblName);
+            SET("created_by=#{c.createdBy}");
+            SET("editor_json =#{c.editorJson,typeHandler =co.istad.photostad.config.DesignJsonTypeHandler}::json");
+            WHERE("id=#{c.id}");
         }}.toString();
     }
 }

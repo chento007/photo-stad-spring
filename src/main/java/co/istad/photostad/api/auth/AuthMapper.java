@@ -1,9 +1,8 @@
 package co.istad.photostad.api.auth;
 
 import co.istad.photostad.api.user.Authority;
-import co.istad.photostad.api.user.Role;
+import co.istad.photostad.api.role.Role;
 import co.istad.photostad.api.user.User;
-import co.istad.photostad.api.user.UserProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

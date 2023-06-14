@@ -20,7 +20,7 @@ public interface UserService {
      * @return pagination
      */
 
-    PageInfo<UserDto> selectAll(int page, int limit, String name,Boolean isDeleted,Boolean isFetchAllStatus);
+    PageInfo<UserDto> selectAll(int page, int limit, String name);
 
     /**
      * search user by user ID

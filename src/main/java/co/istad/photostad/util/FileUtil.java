@@ -1,14 +1,12 @@
 package co.istad.photostad.util;
 
 
-import co.istad.photostad.api.json.Layer;
-import co.istad.photostad.file.web.FileBase64Dto;
-import co.istad.photostad.file.web.FileDto;
+import co.istad.photostad.api.file.web.FileBase64Dto;
+import co.istad.photostad.api.file.web.FileDto;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.xml.bind.DatatypeConverter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -18,9 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -123,29 +118,5 @@ public class FileUtil {
         }
     }
 
-    public FileBase64Dto uploadFileBase64(Layer layer) {
-        String[] record = layer.getSrc().split(",");
-        String extension = this.getExtensionBase64(record[0]);
-        String fileImage = record[1];
-        byte[] imageBytes = DatatypeConverter.parseBase64Binary(fileImage);
-        String fileName = String.format("%s.%s", UUID.randomUUID(), extension);
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(imageBytes);
-        try {
-            BufferedImage originalImage = ImageIO.read(inputStream);
-            double widthDouble = layer.getWidth() * layer.getScaleX();
-            double heightDouble = layer.getHeight() * layer.getScaleY();
-            int width = (int) Math.round(widthDouble);
-            int height = (int) Math.round(heightDouble);
-            System.out.println("width: "+width);
-            System.out.println("height: "+height);
-            BufferedImage imageCompress = Thumbnails.of(originalImage)
-                    .size(width, height)
-                    .asBufferedImage();
-            ImageIO.write(imageCompress, extension, new File(fileServerPath + fileName));
-            return new FileBase64Dto(true, fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+
 }

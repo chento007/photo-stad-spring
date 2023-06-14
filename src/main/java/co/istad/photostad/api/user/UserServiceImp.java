@@ -33,11 +33,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public PageInfo<UserDto> selectAll(int page, int limit, String name, Boolean isDeleted, Boolean isFetchAllStatus) {
+    public PageInfo<UserDto> selectAll(int page, int limit, String name ){
         PageInfo<User> userPageInfo = PageHelper.startPage(page, limit).doSelectPageInfo(
-                () -> userMapper.findAll(name, isDeleted, isFetchAllStatus)
+                () -> userMapper.findAll(name)
         );
-        if (!name.isEmpty() && userMapper.findAll(name, isDeleted, isFetchAllStatus).isEmpty()) {
+        if (!name.isEmpty() && userMapper.findAll(name).isEmpty()) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
                     String.format("User with name %s is not found", name)

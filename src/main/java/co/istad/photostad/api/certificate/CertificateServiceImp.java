@@ -2,6 +2,8 @@ package co.istad.photostad.api.certificate;
 
 import co.istad.photostad.api.certificate.web.CertificateDto;
 import co.istad.photostad.api.certificate.web.CreateCertificateDto;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -49,6 +51,33 @@ public class CertificateServiceImp implements CertificateService{
         if(isIdExit){
             certificateMapper.deleteById(id);
             return id;
+        }
+        throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                String.format("certificate with %d hasn't  found",id)
+        );
+    }
+
+    @Override
+    public PageInfo<CertificateDto> selectAll(int page, int limit) {
+        PageInfo<Certificate> certificatePageInfo= PageHelper.startPage(page, limit).doSelectPageInfo(
+                () ->  certificateMapper.findAll()
+        );
+        return certificateMapStrut.certificatePageInfoToCertificatePageInfoDto(certificatePageInfo);
+    }
+
+    @Override
+    public CertificateDto updateCertificate(Integer id, CreateCertificateDto certificateDto) {
+        if(certificateMapper.isIdExist(id)){
+            Certificate certificate=certificateMapStrut.createCertificateDtoToCertificate(certificateDto);
+            certificate.setId(id);
+            if(certificateMapper.update(certificate)){
+                return this.selectCertificateById(id);
+            }
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "certificate update is fail"
+            );
         }
         throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND,

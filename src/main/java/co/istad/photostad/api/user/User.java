@@ -1,6 +1,7 @@
 package co.istad.photostad.api.user;
 
 import co.istad.photostad.api.image.Image;
+import co.istad.photostad.api.role.Role;
 import lombok.*;
 
 import java.sql.Timestamp;

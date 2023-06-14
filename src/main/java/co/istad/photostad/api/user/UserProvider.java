@@ -14,16 +14,14 @@ public class UserProvider {
         }}.toString();
     }
 
-    public String buildFindAllUserWithNameSql(@Param("name") String name, @Param("f") Boolean isFetchAllStatus) {
+    public String buildFindAllUserWithNameSql(@Param("name") String name) {
         return new SQL() {{
             SELECT("*");
             FROM(tblName);
-            if (isFetchAllStatus) {
-                WHERE("is_deleted=TRUE");
-            } else if (!name.isEmpty()) {
-                WHERE("name ILIKE CONCAT('%',#{name},'%')", "is_deleted=#{status}");
+            if (!name.isEmpty()) {
+                WHERE("name ILIKE CONCAT('%',#{name},'%')", "is_deleted=false");
             } else {
-                WHERE("is_deleted=#{status}");
+                WHERE("is_deleted=false");
             }
         }}.toString();
     }
